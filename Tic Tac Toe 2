@@ -12,6 +12,7 @@ int check(char sym[9],char ch,int count);
 struct myDataType inputValue(char sym[9],int count);
 void Display(char sym[9]);
 
+//Checks to see if the game is finishes and asks the players if they want a rematch
 void main(){
     char reStart;
     again:
@@ -26,7 +27,7 @@ void main(){
     else
         exit(0);
 }
-
+//A simple data structure called an array used to store the "gameboard" positions. Array of type char and or characters.  
 void run(){
     int count = 0;
     struct myDataType info;
@@ -43,6 +44,7 @@ void run(){
         goto again;
     }
 }
+//a bunch of if statements that check whether or not someone has won the game by getting at least 3 in a row
 int check(char sym[9],char ch,int count){
     int i;
     for(i = 0;i<=6; i+=3)//it's for row
@@ -59,11 +61,13 @@ int check(char sym[9],char ch,int count){
     else if(sym[2]==ch && sym[4]==ch && sym[6]==ch){
             printf("the Winner is : %c",ch);return 1;
         }
+		//Final if statement to check if there can actually be a winner and if not it prints "it's draw" as no more pieces can be placed
     else if(count==8){
         printf("the Game is DRAW");
         return 1;
     }else return 0;
 }
+//method using the array so players can take turns at the gameboard
 struct myDataType inputValue(char sym[9],int count){
     char value;
     int i;
@@ -89,13 +93,14 @@ struct myDataType inputValue(char sym[9],int count){
             info.ch = ' ';
         }
     }
+	//makes sure the players don't enter an invalid character and or a character not in the array or a character that's already been used.
     if(info.i == -1){
         printf("\nInput is not Valid");
         goto inputAgain;
     }
     return info;
 }
-
+//prints line by line what the game board will look like
 void Display(char sym[9]){
 	printf("\t\t\t\tT i c	t a c	t o e");
 	printf("\nPlayers 1 Symbol: X");
